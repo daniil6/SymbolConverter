@@ -10,8 +10,8 @@ CMainFrame::CMainFrame(wxFrame* frame)
     validTxt->SetIncludes(*str);
 
     wxButton* convertButton = new wxButton(this, NewControlId(), wxT("Convert"));
-    m_inTextCtrl = new wxTextCtrl(this, NewControlId(), wxT(""), wxDefaultPosition, wxSize(200, 250), wxTE_MULTILINE);
-    m_outTextCtrl = new wxTextCtrl(this, NewControlId(), wxT(""), wxDefaultPosition, wxSize(200, 250), wxTE_MULTILINE);
+    m_inTextCtrl = new wxTextCtrl(this, NewControlId(), wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+    m_outTextCtrl = new wxTextCtrl(this, NewControlId(), wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
     m_inTextCtrl->SetValidator(*validTxt);
     m_outTextCtrl->SetValidator(*validTxt);
 
@@ -19,9 +19,9 @@ CMainFrame::CMainFrame(wxFrame* frame)
     main_box->Add(convertButton);
 
     wxBoxSizer* h_box = new wxBoxSizer(wxHORIZONTAL);
-    h_box->Add(m_inTextCtrl);
-    h_box->Add(m_outTextCtrl);
-    main_box->Add(h_box);
+    h_box->Add(m_inTextCtrl, 0, wxEXPAND);
+    h_box->Add(m_outTextCtrl, 1, wxEXPAND);
+    main_box->Add(h_box, 1, wxEXPAND);
 
     SetSizerAndFit(main_box);
 
@@ -50,6 +50,7 @@ void CMainFrame::OnConvert(wxCommandEvent& event)
 {
     std::string strParse;
     std::string strIn = m_inTextCtrl->GetValue().ToStdString();
+    m_outTextCtrl->Clear();
 
     std::vector<double> out;
     for(auto itr = strIn.begin(); itr != strIn.end() + 1; ++itr) {
@@ -64,4 +65,6 @@ void CMainFrame::OnConvert(wxCommandEvent& event)
         wxString str(ConvertDoubleToBit(p));
         m_outTextCtrl->SetValue(str);
     }
+
+    this->SetSizerAndFit(this->GetSizer());
 }
