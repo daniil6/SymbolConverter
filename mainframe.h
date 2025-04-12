@@ -1,21 +1,18 @@
-#ifndef CMAINFRAME_H
-#define CMAINFRAME_H
+#pragma once
 
-#include <RBKLib.h>
-#include <wx/wx.h>
+#include <wx/frame.h>
+#include <wx/textctrl.h>
 
 class CMainFrame : public wxFrame
 {
 private:
-    wxTextCtrl* m_inTextCtrl;
-    wxTextCtrl* m_outTextCtrl;
+    wxTextCtrl* mTxtA;
+    wxTextCtrl* mTxtB;
 
     void OnConvert(wxCommandEvent& event);
     void OnKeyDown(wxKeyEvent& event);
 
 public:
-    CMainFrame(wxFrame* frame);
-    ~CMainFrame();
+    CMainFrame();
+    ~CMainFrame() override;
 };
-
-#endif // CMAINFRAME_H

@@ -1,16 +1,14 @@
 #include "mainframe.h"
 
-class wxMiniApp : public wxApp
+#include <wx/app.h>
+
+class CMainApp : public wxApp
 {
 public:
-    virtual bool OnInit();
+    virtual bool OnInit()
+    {
+        return (new CMainFrame())->Show();
+    }
 };
 
-IMPLEMENT_APP(wxMiniApp);
-
-bool wxMiniApp::OnInit()
-{
-    CMainFrame* mainFrame = new CMainFrame(NULL);
-    mainFrame->Show();
-    return true;
-}
+IMPLEMENT_APP(CMainApp);
